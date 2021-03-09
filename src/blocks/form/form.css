@@ -1,0 +1,12 @@
+.form {
+    display: flex;
+    max-width: 358px;
+    margin: auto;
+    position: relative;
+}
+
+@media (max-width: 480px) {
+    .form{
+        width: calc(100% - 60px);
+    }
+}

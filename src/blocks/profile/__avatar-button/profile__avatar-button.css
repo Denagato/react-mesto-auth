@@ -1,0 +1,21 @@
+.profile__avatar-button {
+  width: 101%;
+  height: 101%;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: background-color .7s ease;
+}
+
+.profile__avatar-button:hover {
+  background-color: rgba(0, 0, 0, .8);
+  background-image: url('../../../images/avatar-edit.svg');
+  background-size: 26px 26px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}

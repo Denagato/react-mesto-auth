@@ -1,0 +1,7 @@
+.popup__field-link {
+  border: none;
+  border-bottom: 1px solid gray;
+  width: 100%;
+  margin-bottom: 5px;
+  padding-bottom: 13px;
+}

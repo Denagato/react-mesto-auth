@@ -1,0 +1,25 @@
+.element {
+  width: 282px;
+  height: 361px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 21px;
+  position: relative;
+}
+
+@media screen and (max-width: 320px) {
+  .element {
+    margin: auto;
+    margin-bottom: 20px;
+  }
+
+  .element:last-of-type {
+    margin-bottom: 48px;
+  }
+
+  .element:first-of-type {
+    margin-top: 36px;
+  }
+}

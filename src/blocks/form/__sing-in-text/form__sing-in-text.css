@@ -1,0 +1,17 @@
+.form__sing-in-text {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 1.2;
+    margin: 15px auto;
+}
+
+.form__sing-in-text:hover {
+    opacity: 0.6;
+}
+
+@media (max-width: 460px) {
+    .form__sing-in-text{
+        margin-top: 20px
+    }
+}

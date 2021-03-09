@@ -1,0 +1,23 @@
+.elements {
+  max-width: 882px;
+  margin: 50px auto 45px;
+}
+
+@media screen and (max-width: 845px) {
+  .elements {
+    justify-content: space-evenly;
+  }
+}
+
+@media screen and (max-width: 563px) {
+  .elements {
+    margin: 20px auto;
+    max-width: 282px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .elements {
+    display: inline;
+  }
+}

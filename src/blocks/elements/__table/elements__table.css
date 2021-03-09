@@ -1,0 +1,17 @@
+.elements__table {
+  list-style-type: none;
+  margin: 0 auto;
+  padding: 0;
+  justify-content: center;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 282px);
+  grid-auto-rows: 361px;
+  gap: 20px 18px;
+}
+
+@media screen and (max-width: 320px) {
+  .elements__table {
+    display: inline;
+  }
+}

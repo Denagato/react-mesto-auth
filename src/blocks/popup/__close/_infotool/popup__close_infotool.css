@@ -1,0 +1,6 @@
+@media (max-width: 460px) {
+    .popup__close_infotool{
+        right: calc(50% - 15px);
+        top: -56px;
+    }
+}
