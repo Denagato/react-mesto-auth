@@ -180,7 +180,6 @@ const [isRequestSuccessful, setRequestSuccessful] = useState(false);
                 throw new Error('Пользователь не зарегесрирован');
             }
             if (!res || res.statusCode === 400) {
-                throw new Error('Что-то не так с регистрацией');
                 setIsInfoTooltipOpen(true)
                 throw new Error('Не передано одно из полей ');
             }
