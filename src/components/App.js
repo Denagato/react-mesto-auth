@@ -177,7 +177,7 @@ const [isRequestSuccessful, setRequestSuccessful] = useState(false);
         .then((res) => {
             if (!res || res.statusCode === 401) {
                 setIsInfoTooltipOpen(true)
-                throw new Error('Пользователь не зарегесрирован');
+                throw new Error('Пользователь не зарегестрирован');
             }
             if (!res || res.statusCode === 400) {
                 setIsInfoTooltipOpen(true)
