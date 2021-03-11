@@ -46,9 +46,24 @@ function App() {
     document.addEventListener('keydown', handleEscClose);
   }
 
+  function handleDeleteClick(card) {
+    setIsDeletePopupOpen(!isDeletePopupOpen);
+    setSelectedDeleteCard(card);
+    document.addEventListener('keydown', handleEscClose);
+  }
+
   function onInfoTooltip() {
     setIsInfoTooltipOpen(!isInfoTooltipOpen);
 }
+
+const [isRequestSuccessful, setRequestSuccessful] = useState(false);
+
+  function closeInfoTooltip() {
+    setIsInfoTooltipOpen(false);
+      if (isRequestSuccessful) {
+        history.push('/sing-in');
+      }
+  }
 
   function closeAllPopups() {
     setIsAddPlacePopupOpen(false);
@@ -149,25 +164,41 @@ function App() {
           if (!res || res.statusCode === 400) {
             throw new Error('Что-то не так с регистрацией');
           }
+          if (res.data) {
+            setRequestSuccessful(true);
+          }
         })
-        .catch(err => {
-          console.log(err)
-        })
+        .catch((err) => console.log(`Что-то пошло не так: ${err}`))
   }
 
   const handleLogin = (data) => {
     const { email, password } = data;
     return authorize(email, password)
-      .then((res) => {
-        if (!res || res.statusCode === 400) {
-          throw new Error('Что-то не так с регистрацией');
-        }
-        if (res.token) {
-          setLoggedIn(true);
-          localStorage.setItem('jwt', res.token);
-        }
-      })
-  }
+        .then((res) => {
+            if (!res || res.statusCode === 401) {
+                setIsInfoTooltipOpen(true)
+                throw new Error('Пользователь не зарегесрирован');
+            }
+            if (!res || res.statusCode === 400) {
+                throw new Error('Что-то не так с регистрацией');
+                setIsInfoTooltipOpen(true)
+                throw new Error('Не передано одно из полей ');
+            }
+            if (res.token) {
+                setLoggedIn(true);
+                setRequestSuccessful(true);
+                history.push('/')
+                localStorage.setItem('jwt', res.token);
+                getContent(res.token)
+                    .then((res) => {
+                        if (res){
+                        setLoginData(res.data);
+                        }
+                    });
+            }
+        })
+        .catch((err) => console.log(`Что-то пошло не так: ${err}`))
+}
 
 
   const [loginData, setLoginData] = useState({
@@ -185,11 +216,13 @@ function App() {
           setLoginData(res.data);
         }
       })
+      .catch((err) => console.log(`Что-то пошло не так: ${err}`))
     }
   }, []);
 
   const handleSignOut = () => {
     localStorage.removeItem('jwt');
+    setRequestSuccessful(false);
   }
 
   return (
@@ -204,7 +237,7 @@ function App() {
               onCardClick={handleCardClick}
               cards={cards} 
               onCardLike={handleCardLike}
-              onCardDelete={handleCardDelete}
+              onCardDelete={handleDeleteClick}
               signOut={handleSignOut}
               loginData={loginData.email} />
             <Route path="/sign-up">
@@ -256,7 +289,8 @@ function App() {
 
         <InfoTooltip
           isOpen={isInfoTooltipOpen}
-          onClose={closeAllPopups}
+          onClose={closeInfoTooltip}
+          isRequestSuccessful={isRequestSuccessful}
         />
       </div>
     </CurrentUserContext.Provider>

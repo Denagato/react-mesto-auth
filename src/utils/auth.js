@@ -12,6 +12,7 @@ export const register = (email, password) => {
         body: JSON.stringify({ email, password })
     })
     .then(chekResponse)
+    .catch((err) => console.log(`Что-то пошло не так: ${err}`))
 };
 
 export const authorize = (email, password) => {
@@ -24,6 +25,7 @@ export const authorize = (email, password) => {
         body: JSON.stringify({ email, password })
     })
     .then(chekResponse)
+    .catch((err) => console.log(`Что-то пошло не так: ${err}`))
 };
 
 export const getContent = (token) => {
@@ -34,5 +36,7 @@ export const getContent = (token) => {
         "Content-Type": "application/json",
         'authorization': `Bearer ${token}`,
       },
-    }).then(chekResponse)
+    })
+    .then(chekResponse)
+    .catch((err) => console.log(`Что-то пошло не так: ${err}`))
   };
